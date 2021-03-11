@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/gerenciador-de-herois.iml" filepath="$PROJECT_DIR$/.idea/gerenciador-de-herois.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heroesapi/heroesapi.iml" filepath="$PROJECT_DIR$/heroesapi/heroesapi.iml" />
+    </modules>
+  </component>
+</project>
