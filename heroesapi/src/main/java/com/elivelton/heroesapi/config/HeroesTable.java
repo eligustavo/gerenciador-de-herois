@@ -1,17 +1,22 @@
 package com.elivelton.heroesapi.config;
 
+
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.model.*;
+import lombok.extern.slf4j.Slf4j;
 import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
+import static com.elivelton.heroesapi.constants.HeroesConstant.ENDPOINT_DYNAMO;
+import static com.elivelton.heroesapi.constants.HeroesConstant.REGION_DYNAMO;
 
+@Slf4j
 @Configuration
 @EnableDynamoDBRepositories
 public class HeroesTable {
@@ -25,7 +30,7 @@ public class HeroesTable {
         String tableName = "Heroes_api_Table";
 
         try {
-            System.out.println("Criando tabela, aguarde...");
+            log.info("Criando tabela, aguarde...");
             Table table = dynamoDB.createTable(tableName,
                     Arrays.asList(new KeySchemaElement("id", KeyType.HASH)
                     ),
@@ -34,11 +39,11 @@ public class HeroesTable {
                     ),
                     new ProvisionedThroughput(5L, 5L));
             table.waitForActive();
-            System.out.println("Successo " + table.getDescription().getTableStatus());
+            log.info("Successo " + table.getDescription().getTableStatus());
 
         } catch (Exception e) {
-            System.err.println("Não foi possível criar a tabela");
-            System.err.println(e.getMessage());
+            log.error("Não foi possível criar a tabela");
+            log.error(e.getMessage());
         }
     }
 }
