@@ -6,10 +6,12 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
 import com.amazonaws.services.dynamodbv2.document.Table;
-import com.amazonaws.services.dynamodbv2.model.*;
+import com.amazonaws.services.dynamodbv2.model.AttributeDefinition;
+import com.amazonaws.services.dynamodbv2.model.KeySchemaElement;
+import com.amazonaws.services.dynamodbv2.model.KeyType;
+import com.amazonaws.services.dynamodbv2.model.ProvisionedThroughput;
+import com.amazonaws.services.dynamodbv2.model.ScalarAttributeType;
 import lombok.extern.slf4j.Slf4j;
-import org.socialsignin.spring.data.dynamodb.repository.config.EnableDynamoDBRepositories;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
 
@@ -17,8 +19,6 @@ import static com.elivelton.heroesapi.constants.HeroesConstant.ENDPOINT_DYNAMO;
 import static com.elivelton.heroesapi.constants.HeroesConstant.REGION_DYNAMO;
 
 @Slf4j
-@Configuration
-@EnableDynamoDBRepositories
 public class HeroesTable {
     public static void main(String[] args) {
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
@@ -27,7 +27,7 @@ public class HeroesTable {
 
         DynamoDB dynamoDB = new DynamoDB(client);
 
-        String tableName = "Heroes_api_Table";
+        String tableName = "Heroes_Table";
 
         try {
             log.info("Criando tabela, aguarde...");
